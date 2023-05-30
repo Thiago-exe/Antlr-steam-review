@@ -28,13 +28,25 @@ public class HelloBaseListener implements HelloListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPair(HelloParser.PairContext ctx) { }
+	@Override public void enterData(HelloParser.DataContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPair(HelloParser.PairContext ctx) { }
+	@Override public void exitData(HelloParser.DataContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNext(HelloParser.NextContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNext(HelloParser.NextContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

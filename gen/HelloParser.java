@@ -19,10 +19,10 @@ public class HelloParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, JSON_START=6, JSON_END=7, COLON=8, 
 		COMMA=9, STRING=10, NUMBER=11, HEX=12, WHITESPACE=13, COMMENT=14, COMMENT_BLOCK=15;
 	public static final int
-		RULE_json = 0, RULE_pair = 1, RULE_value = 2, RULE_array = 3;
+		RULE_json = 0, RULE_data = 1, RULE_next = 2, RULE_value = 3, RULE_array = 4;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"json", "pair", "value", "array"
+			"json", "data", "next", "value", "array"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -95,11 +95,14 @@ public class HelloParser extends Parser {
 	public static class JsonContext extends ParserRuleContext {
 		public TerminalNode JSON_START() { return getToken(HelloParser.JSON_START, 0); }
 		public TerminalNode JSON_END() { return getToken(HelloParser.JSON_END, 0); }
-		public List<PairContext> pair() {
-			return getRuleContexts(PairContext.class);
+		public List<JsonContext> json() {
+			return getRuleContexts(JsonContext.class);
 		}
-		public PairContext pair(int i) {
-			return getRuleContext(PairContext.class,i);
+		public JsonContext json(int i) {
+			return getRuleContext(JsonContext.class,i);
+		}
+		public DataContext data() {
+			return getRuleContext(DataContext.class,0);
 		}
 		public JsonContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -125,26 +128,41 @@ public class HelloParser extends Parser {
 		enterRule(_localctx, 0, RULE_json);
 		int _la;
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(8);
-			match(JSON_START);
-			setState(12);
+			setState(19);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==STRING) {
+			switch (_input.LA(1)) {
+			case JSON_START:
+				enterOuterAlt(_localctx, 1);
 				{
-				{
-				setState(9);
-				pair();
-				}
-				}
+				setState(10);
+				match(JSON_START);
 				setState(14);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			}
-			setState(15);
-			match(JSON_END);
+				while (_la==JSON_START || _la==STRING) {
+					{
+					{
+					setState(11);
+					json();
+					}
+					}
+					setState(16);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				setState(17);
+				match(JSON_END);
+				}
+				break;
+			case STRING:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(18);
+				data();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -159,43 +177,99 @@ public class HelloParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class PairContext extends ParserRuleContext {
+	public static class DataContext extends ParserRuleContext {
 		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
 		public TerminalNode COLON() { return getToken(HelloParser.COLON, 0); }
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public PairContext(ParserRuleContext parent, int invokingState) {
+		public NextContext next() {
+			return getRuleContext(NextContext.class,0);
+		}
+		public DataContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_pair; }
+		@Override public int getRuleIndex() { return RULE_data; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterPair(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterData(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitPair(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitData(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitPair(this);
+			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitData(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final PairContext pair() throws RecognitionException {
-		PairContext _localctx = new PairContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_pair);
+	public final DataContext data() throws RecognitionException {
+		DataContext _localctx = new DataContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_data);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(17);
+			setState(21);
 			match(STRING);
-			setState(18);
+			setState(22);
 			match(COLON);
-			setState(19);
+			setState(23);
 			value();
+			setState(25);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				{
+				setState(24);
+				next();
+				}
+				break;
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class NextContext extends ParserRuleContext {
+		public TerminalNode COMMA() { return getToken(HelloParser.COMMA, 0); }
+		public NextContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_next; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterNext(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitNext(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitNext(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final NextContext next() throws RecognitionException {
+		NextContext _localctx = new NextContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_next);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(27);
+			match(COMMA);
 			}
 		}
 		catch (RecognitionException re) {
@@ -240,62 +314,60 @@ public class HelloParser extends Parser {
 
 	public final ValueContext value() throws RecognitionException {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_value);
+		enterRule(_localctx, 6, RULE_value);
 		try {
-			setState(28);
+			setState(36);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case STRING:
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(21);
+				setState(29);
 				match(STRING);
 				}
 				break;
-			case NUMBER:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(22);
+				setState(30);
 				match(NUMBER);
 				}
 				break;
-			case JSON_START:
+			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(23);
+				setState(31);
 				json();
 				}
 				break;
-			case T__3:
+			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(24);
+				setState(32);
 				array();
 				}
 				break;
-			case T__0:
+			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(25);
+				setState(33);
 				match(T__0);
 				}
 				break;
-			case T__1:
+			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(26);
+				setState(34);
 				match(T__1);
 				}
 				break;
-			case T__2:
+			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(27);
+				setState(35);
 				match(T__2);
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -342,40 +414,40 @@ public class HelloParser extends Parser {
 
 	public final ArrayContext array() throws RecognitionException {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_array);
+		enterRule(_localctx, 8, RULE_array);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
+			setState(38);
 			match(T__3);
-			setState(39);
+			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 3166L) != 0)) {
 				{
-				setState(31);
+				setState(39);
 				value();
-				setState(36);
+				setState(44);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(32);
+					setState(40);
 					match(COMMA);
-					setState(33);
+					setState(41);
 					value();
 					}
 					}
-					setState(38);
+					setState(46);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(41);
+			setState(49);
 			match(T__4);
 			}
 		}
@@ -391,36 +463,41 @@ public class HelloParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000f,\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0001\u0000\u0001\u0000\u0005"+
-		"\u0000\u000b\b\u0000\n\u0000\f\u0000\u000e\t\u0000\u0001\u0000\u0001\u0000"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002"+
-		"\u001d\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0005\u0003"+
-		"#\b\u0003\n\u0003\f\u0003&\t\u0003\u0003\u0003(\b\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0000\u0000\u0004\u0000\u0002\u0004\u0006\u0000\u0000"+
-		"0\u0000\b\u0001\u0000\u0000\u0000\u0002\u0011\u0001\u0000\u0000\u0000"+
-		"\u0004\u001c\u0001\u0000\u0000\u0000\u0006\u001e\u0001\u0000\u0000\u0000"+
-		"\b\f\u0005\u0006\u0000\u0000\t\u000b\u0003\u0002\u0001\u0000\n\t\u0001"+
-		"\u0000\u0000\u0000\u000b\u000e\u0001\u0000\u0000\u0000\f\n\u0001\u0000"+
-		"\u0000\u0000\f\r\u0001\u0000\u0000\u0000\r\u000f\u0001\u0000\u0000\u0000"+
-		"\u000e\f\u0001\u0000\u0000\u0000\u000f\u0010\u0005\u0007\u0000\u0000\u0010"+
-		"\u0001\u0001\u0000\u0000\u0000\u0011\u0012\u0005\n\u0000\u0000\u0012\u0013"+
-		"\u0005\b\u0000\u0000\u0013\u0014\u0003\u0004\u0002\u0000\u0014\u0003\u0001"+
-		"\u0000\u0000\u0000\u0015\u001d\u0005\n\u0000\u0000\u0016\u001d\u0005\u000b"+
-		"\u0000\u0000\u0017\u001d\u0003\u0000\u0000\u0000\u0018\u001d\u0003\u0006"+
-		"\u0003\u0000\u0019\u001d\u0005\u0001\u0000\u0000\u001a\u001d\u0005\u0002"+
-		"\u0000\u0000\u001b\u001d\u0005\u0003\u0000\u0000\u001c\u0015\u0001\u0000"+
-		"\u0000\u0000\u001c\u0016\u0001\u0000\u0000\u0000\u001c\u0017\u0001\u0000"+
-		"\u0000\u0000\u001c\u0018\u0001\u0000\u0000\u0000\u001c\u0019\u0001\u0000"+
-		"\u0000\u0000\u001c\u001a\u0001\u0000\u0000\u0000\u001c\u001b\u0001\u0000"+
-		"\u0000\u0000\u001d\u0005\u0001\u0000\u0000\u0000\u001e\'\u0005\u0004\u0000"+
-		"\u0000\u001f$\u0003\u0004\u0002\u0000 !\u0005\t\u0000\u0000!#\u0003\u0004"+
-		"\u0002\u0000\" \u0001\u0000\u0000\u0000#&\u0001\u0000\u0000\u0000$\"\u0001"+
-		"\u0000\u0000\u0000$%\u0001\u0000\u0000\u0000%(\u0001\u0000\u0000\u0000"+
-		"&$\u0001\u0000\u0000\u0000\'\u001f\u0001\u0000\u0000\u0000\'(\u0001\u0000"+
-		"\u0000\u0000()\u0001\u0000\u0000\u0000)*\u0005\u0005\u0000\u0000*\u0007"+
-		"\u0001\u0000\u0000\u0000\u0004\f\u001c$\'";
+		"\u0004\u0001\u000f4\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
+		"\u0000\u0001\u0000\u0005\u0000\r\b\u0000\n\u0000\f\u0000\u0010\t\u0000"+
+		"\u0001\u0000\u0001\u0000\u0003\u0000\u0014\b\u0000\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0003\u0001\u001a\b\u0001\u0001\u0002\u0001\u0002"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0003\u0003%\b\u0003\u0001\u0004\u0001\u0004\u0001\u0004"+
+		"\u0001\u0004\u0005\u0004+\b\u0004\n\u0004\f\u0004.\t\u0004\u0003\u0004"+
+		"0\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0000\u0000\u0005\u0000"+
+		"\u0002\u0004\u0006\b\u0000\u00009\u0000\u0013\u0001\u0000\u0000\u0000"+
+		"\u0002\u0015\u0001\u0000\u0000\u0000\u0004\u001b\u0001\u0000\u0000\u0000"+
+		"\u0006$\u0001\u0000\u0000\u0000\b&\u0001\u0000\u0000\u0000\n\u000e\u0005"+
+		"\u0006\u0000\u0000\u000b\r\u0003\u0000\u0000\u0000\f\u000b\u0001\u0000"+
+		"\u0000\u0000\r\u0010\u0001\u0000\u0000\u0000\u000e\f\u0001\u0000\u0000"+
+		"\u0000\u000e\u000f\u0001\u0000\u0000\u0000\u000f\u0011\u0001\u0000\u0000"+
+		"\u0000\u0010\u000e\u0001\u0000\u0000\u0000\u0011\u0014\u0005\u0007\u0000"+
+		"\u0000\u0012\u0014\u0003\u0002\u0001\u0000\u0013\n\u0001\u0000\u0000\u0000"+
+		"\u0013\u0012\u0001\u0000\u0000\u0000\u0014\u0001\u0001\u0000\u0000\u0000"+
+		"\u0015\u0016\u0005\n\u0000\u0000\u0016\u0017\u0005\b\u0000\u0000\u0017"+
+		"\u0019\u0003\u0006\u0003\u0000\u0018\u001a\u0003\u0004\u0002\u0000\u0019"+
+		"\u0018\u0001\u0000\u0000\u0000\u0019\u001a\u0001\u0000\u0000\u0000\u001a"+
+		"\u0003\u0001\u0000\u0000\u0000\u001b\u001c\u0005\t\u0000\u0000\u001c\u0005"+
+		"\u0001\u0000\u0000\u0000\u001d%\u0005\n\u0000\u0000\u001e%\u0005\u000b"+
+		"\u0000\u0000\u001f%\u0003\u0000\u0000\u0000 %\u0003\b\u0004\u0000!%\u0005"+
+		"\u0001\u0000\u0000\"%\u0005\u0002\u0000\u0000#%\u0005\u0003\u0000\u0000"+
+		"$\u001d\u0001\u0000\u0000\u0000$\u001e\u0001\u0000\u0000\u0000$\u001f"+
+		"\u0001\u0000\u0000\u0000$ \u0001\u0000\u0000\u0000$!\u0001\u0000\u0000"+
+		"\u0000$\"\u0001\u0000\u0000\u0000$#\u0001\u0000\u0000\u0000%\u0007\u0001"+
+		"\u0000\u0000\u0000&/\u0005\u0004\u0000\u0000\',\u0003\u0006\u0003\u0000"+
+		"()\u0005\t\u0000\u0000)+\u0003\u0006\u0003\u0000*(\u0001\u0000\u0000\u0000"+
+		"+.\u0001\u0000\u0000\u0000,*\u0001\u0000\u0000\u0000,-\u0001\u0000\u0000"+
+		"\u0000-0\u0001\u0000\u0000\u0000.,\u0001\u0000\u0000\u0000/\'\u0001\u0000"+
+		"\u0000\u0000/0\u0001\u0000\u0000\u000001\u0001\u0000\u0000\u000012\u0005"+
+		"\u0005\u0000\u00002\t\u0001\u0000\u0000\u0000\u0006\u000e\u0013\u0019"+
+		"$,/";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

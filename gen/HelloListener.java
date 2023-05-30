@@ -17,15 +17,25 @@ public interface HelloListener extends ParseTreeListener {
 	 */
 	void exitJson(HelloParser.JsonContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HelloParser#pair}.
+	 * Enter a parse tree produced by {@link HelloParser#data}.
 	 * @param ctx the parse tree
 	 */
-	void enterPair(HelloParser.PairContext ctx);
+	void enterData(HelloParser.DataContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HelloParser#pair}.
+	 * Exit a parse tree produced by {@link HelloParser#data}.
 	 * @param ctx the parse tree
 	 */
-	void exitPair(HelloParser.PairContext ctx);
+	void exitData(HelloParser.DataContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HelloParser#next}.
+	 * @param ctx the parse tree
+	 */
+	void enterNext(HelloParser.NextContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HelloParser#next}.
+	 * @param ctx the parse tree
+	 */
+	void exitNext(HelloParser.NextContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HelloParser#value}.
 	 * @param ctx the parse tree
