@@ -1,0 +1,3 @@
+grammar Hello;
+
+C
