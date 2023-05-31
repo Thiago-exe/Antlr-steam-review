@@ -1,4 +1,4 @@
-// Generated from D:/Vou trabalhar na Nuuvem/Java/Antlr/src\Hello.g4 by ANTLR 4.12.0
+package Antlr;// Generated from /home/rubick/Matheus/Projetos/UFPI/Compiladores/Antlr-steam-review/src/Hello.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -119,7 +119,7 @@ public class HelloParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitJson(this);
+			if ( visitor instanceof HelloVisitor) return ((HelloVisitor<? extends T>)visitor).visitJson(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -201,7 +201,7 @@ public class HelloParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitTipo_informacao(this);
+			if ( visitor instanceof HelloVisitor) return ((HelloVisitor<? extends T>)visitor).visitTipo_informacao(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -258,7 +258,7 @@ public class HelloParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitSeparador(this);
+			if ( visitor instanceof HelloVisitor) return ((HelloVisitor<? extends T>)visitor).visitSeparador(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -308,7 +308,7 @@ public class HelloParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitValor(this);
+			if ( visitor instanceof HelloVisitor) return ((HelloVisitor<? extends T>)visitor).visitValor(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -408,7 +408,7 @@ public class HelloParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitArray(this);
+			if ( visitor instanceof HelloVisitor) return ((HelloVisitor<? extends T>)visitor).visitArray(this);
 			else return visitor.visitChildren(this);
 		}
 	}

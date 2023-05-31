@@ -1,4 +1,4 @@
-// Generated from D:/Vou trabalhar na Nuuvem/Java/Antlr/src\Hello.g4 by ANTLR 4.12.0
+package Antlr;// Generated from /home/rubick/Matheus/Projetos/UFPI/Compiladores/Antlr-steam-review/src/Hello.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
