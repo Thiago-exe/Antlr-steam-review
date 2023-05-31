@@ -17,35 +17,35 @@ public interface HelloListener extends ParseTreeListener {
 	 */
 	void exitJson(HelloParser.JsonContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HelloParser#data}.
+	 * Enter a parse tree produced by {@link HelloParser#tipo_informacao}.
 	 * @param ctx the parse tree
 	 */
-	void enterData(HelloParser.DataContext ctx);
+	void enterTipo_informacao(HelloParser.Tipo_informacaoContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HelloParser#data}.
+	 * Exit a parse tree produced by {@link HelloParser#tipo_informacao}.
 	 * @param ctx the parse tree
 	 */
-	void exitData(HelloParser.DataContext ctx);
+	void exitTipo_informacao(HelloParser.Tipo_informacaoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HelloParser#next}.
+	 * Enter a parse tree produced by {@link HelloParser#separador}.
 	 * @param ctx the parse tree
 	 */
-	void enterNext(HelloParser.NextContext ctx);
+	void enterSeparador(HelloParser.SeparadorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HelloParser#next}.
+	 * Exit a parse tree produced by {@link HelloParser#separador}.
 	 * @param ctx the parse tree
 	 */
-	void exitNext(HelloParser.NextContext ctx);
+	void exitSeparador(HelloParser.SeparadorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HelloParser#value}.
+	 * Enter a parse tree produced by {@link HelloParser#valor}.
 	 * @param ctx the parse tree
 	 */
-	void enterValue(HelloParser.ValueContext ctx);
+	void enterValor(HelloParser.ValorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HelloParser#value}.
+	 * Exit a parse tree produced by {@link HelloParser#valor}.
 	 * @param ctx the parse tree
 	 */
-	void exitValue(HelloParser.ValueContext ctx);
+	void exitValor(HelloParser.ValorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HelloParser#array}.
 	 * @param ctx the parse tree

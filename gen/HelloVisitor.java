@@ -16,23 +16,23 @@ public interface HelloVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJson(HelloParser.JsonContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HelloParser#data}.
+	 * Visit a parse tree produced by {@link HelloParser#tipo_informacao}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitData(HelloParser.DataContext ctx);
+	T visitTipo_informacao(HelloParser.Tipo_informacaoContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HelloParser#next}.
+	 * Visit a parse tree produced by {@link HelloParser#separador}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNext(HelloParser.NextContext ctx);
+	T visitSeparador(HelloParser.SeparadorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HelloParser#value}.
+	 * Visit a parse tree produced by {@link HelloParser#valor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValue(HelloParser.ValueContext ctx);
+	T visitValor(HelloParser.ValorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HelloParser#array}.
 	 * @param ctx the parse tree

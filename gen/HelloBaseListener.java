@@ -28,37 +28,37 @@ public class HelloBaseListener implements HelloListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterData(HelloParser.DataContext ctx) { }
+	@Override public void enterTipo_informacao(HelloParser.Tipo_informacaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitData(HelloParser.DataContext ctx) { }
+	@Override public void exitTipo_informacao(HelloParser.Tipo_informacaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNext(HelloParser.NextContext ctx) { }
+	@Override public void enterSeparador(HelloParser.SeparadorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNext(HelloParser.NextContext ctx) { }
+	@Override public void exitSeparador(HelloParser.SeparadorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValue(HelloParser.ValueContext ctx) { }
+	@Override public void enterValor(HelloParser.ValorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValue(HelloParser.ValueContext ctx) { }
+	@Override public void exitValor(HelloParser.ValorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -16,13 +16,14 @@ public class HelloParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, JSON_START=6, JSON_END=7, COLON=8, 
-		COMMA=9, STRING=10, NUMBER=11, HEX=12, WHITESPACE=13, COMMENT=14, COMMENT_BLOCK=15;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, JSON_INICIO=6, JSON_FIM=7, DOISPONTOS=8, 
+		VIRGULA=9, TEXTO=10, NUMERO=11, CARACTERES=12, WHITESPACE=13;
 	public static final int
-		RULE_json = 0, RULE_data = 1, RULE_next = 2, RULE_value = 3, RULE_array = 4;
+		RULE_json = 0, RULE_tipo_informacao = 1, RULE_separador = 2, RULE_valor = 3, 
+		RULE_array = 4;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"json", "data", "next", "value", "array"
+			"json", "tipo_informacao", "separador", "valor", "array"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -36,8 +37,8 @@ public class HelloParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, "JSON_START", "JSON_END", "COLON", 
-			"COMMA", "STRING", "NUMBER", "HEX", "WHITESPACE", "COMMENT", "COMMENT_BLOCK"
+			null, null, null, null, null, null, "JSON_INICIO", "JSON_FIM", "DOISPONTOS", 
+			"VIRGULA", "TEXTO", "NUMERO", "CARACTERES", "WHITESPACE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -93,16 +94,16 @@ public class HelloParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class JsonContext extends ParserRuleContext {
-		public TerminalNode JSON_START() { return getToken(HelloParser.JSON_START, 0); }
-		public TerminalNode JSON_END() { return getToken(HelloParser.JSON_END, 0); }
+		public TerminalNode JSON_INICIO() { return getToken(HelloParser.JSON_INICIO, 0); }
+		public TerminalNode JSON_FIM() { return getToken(HelloParser.JSON_FIM, 0); }
 		public List<JsonContext> json() {
 			return getRuleContexts(JsonContext.class);
 		}
 		public JsonContext json(int i) {
 			return getRuleContext(JsonContext.class,i);
 		}
-		public DataContext data() {
-			return getRuleContext(DataContext.class,0);
+		public Tipo_informacaoContext tipo_informacao() {
+			return getRuleContext(Tipo_informacaoContext.class,0);
 		}
 		public JsonContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -131,15 +132,15 @@ public class HelloParser extends Parser {
 			setState(19);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case JSON_START:
+			case JSON_INICIO:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(10);
-				match(JSON_START);
+				match(JSON_INICIO);
 				setState(14);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==JSON_START || _la==STRING) {
+				while (_la==JSON_INICIO || _la==TEXTO) {
 					{
 					{
 					setState(11);
@@ -151,14 +152,14 @@ public class HelloParser extends Parser {
 					_la = _input.LA(1);
 				}
 				setState(17);
-				match(JSON_END);
+				match(JSON_FIM);
 				}
 				break;
-			case STRING:
+			case TEXTO:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(18);
-				data();
+				tipo_informacao();
 				}
 				break;
 			default:
@@ -177,53 +178,53 @@ public class HelloParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class DataContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
-		public TerminalNode COLON() { return getToken(HelloParser.COLON, 0); }
-		public ValueContext value() {
-			return getRuleContext(ValueContext.class,0);
+	public static class Tipo_informacaoContext extends ParserRuleContext {
+		public TerminalNode TEXTO() { return getToken(HelloParser.TEXTO, 0); }
+		public TerminalNode DOISPONTOS() { return getToken(HelloParser.DOISPONTOS, 0); }
+		public ValorContext valor() {
+			return getRuleContext(ValorContext.class,0);
 		}
-		public NextContext next() {
-			return getRuleContext(NextContext.class,0);
+		public SeparadorContext separador() {
+			return getRuleContext(SeparadorContext.class,0);
 		}
-		public DataContext(ParserRuleContext parent, int invokingState) {
+		public Tipo_informacaoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_data; }
+		@Override public int getRuleIndex() { return RULE_tipo_informacao; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterData(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterTipo_informacao(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitData(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitTipo_informacao(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitData(this);
+			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitTipo_informacao(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final DataContext data() throws RecognitionException {
-		DataContext _localctx = new DataContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_data);
+	public final Tipo_informacaoContext tipo_informacao() throws RecognitionException {
+		Tipo_informacaoContext _localctx = new Tipo_informacaoContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_tipo_informacao);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(21);
-			match(STRING);
+			match(TEXTO);
 			setState(22);
-			match(COLON);
+			match(DOISPONTOS);
 			setState(23);
-			value();
+			valor();
 			setState(25);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				{
 				setState(24);
-				next();
+				separador();
 				}
 				break;
 			}
@@ -241,35 +242,35 @@ public class HelloParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class NextContext extends ParserRuleContext {
-		public TerminalNode COMMA() { return getToken(HelloParser.COMMA, 0); }
-		public NextContext(ParserRuleContext parent, int invokingState) {
+	public static class SeparadorContext extends ParserRuleContext {
+		public TerminalNode VIRGULA() { return getToken(HelloParser.VIRGULA, 0); }
+		public SeparadorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_next; }
+		@Override public int getRuleIndex() { return RULE_separador; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterNext(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterSeparador(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitNext(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitSeparador(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitNext(this);
+			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitSeparador(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final NextContext next() throws RecognitionException {
-		NextContext _localctx = new NextContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_next);
+	public final SeparadorContext separador() throws RecognitionException {
+		SeparadorContext _localctx = new SeparadorContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_separador);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(27);
-			match(COMMA);
+			match(VIRGULA);
 			}
 		}
 		catch (RecognitionException re) {
@@ -284,37 +285,37 @@ public class HelloParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ValueContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
-		public TerminalNode NUMBER() { return getToken(HelloParser.NUMBER, 0); }
+	public static class ValorContext extends ParserRuleContext {
+		public TerminalNode TEXTO() { return getToken(HelloParser.TEXTO, 0); }
+		public TerminalNode NUMERO() { return getToken(HelloParser.NUMERO, 0); }
 		public JsonContext json() {
 			return getRuleContext(JsonContext.class,0);
 		}
 		public ArrayContext array() {
 			return getRuleContext(ArrayContext.class,0);
 		}
-		public ValueContext(ParserRuleContext parent, int invokingState) {
+		public ValorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_value; }
+		@Override public int getRuleIndex() { return RULE_valor; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterValue(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterValor(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitValue(this);
+			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitValor(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitValue(this);
+			if ( visitor instanceof HelloVisitor ) return ((HelloVisitor<? extends T>)visitor).visitValor(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ValueContext value() throws RecognitionException {
-		ValueContext _localctx = new ValueContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_value);
+	public final ValorContext valor() throws RecognitionException {
+		ValorContext _localctx = new ValorContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_valor);
 		try {
 			setState(36);
 			_errHandler.sync(this);
@@ -323,14 +324,14 @@ public class HelloParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(29);
-				match(STRING);
+				match(TEXTO);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(30);
-				match(NUMBER);
+				match(NUMERO);
 				}
 				break;
 			case 3:
@@ -383,15 +384,15 @@ public class HelloParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ArrayContext extends ParserRuleContext {
-		public List<ValueContext> value() {
-			return getRuleContexts(ValueContext.class);
+		public List<ValorContext> valor() {
+			return getRuleContexts(ValorContext.class);
 		}
-		public ValueContext value(int i) {
-			return getRuleContext(ValueContext.class,i);
+		public ValorContext valor(int i) {
+			return getRuleContext(ValorContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(HelloParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(HelloParser.COMMA, i);
+		public List<TerminalNode> VIRGULA() { return getTokens(HelloParser.VIRGULA); }
+		public TerminalNode VIRGULA(int i) {
+			return getToken(HelloParser.VIRGULA, i);
 		}
 		public ArrayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -427,17 +428,17 @@ public class HelloParser extends Parser {
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 3166L) != 0)) {
 				{
 				setState(39);
-				value();
+				valor();
 				setState(44);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==COMMA) {
+				while (_la==VIRGULA) {
 					{
 					{
 					setState(40);
-					match(COMMA);
+					match(VIRGULA);
 					setState(41);
-					value();
+					valor();
 					}
 					}
 					setState(46);
@@ -463,7 +464,7 @@ public class HelloParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000f4\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\r4\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
 		"\u0000\u0001\u0000\u0005\u0000\r\b\u0000\n\u0000\f\u0000\u0010\t\u0000"+
 		"\u0001\u0000\u0001\u0000\u0003\u0000\u0014\b\u0000\u0001\u0001\u0001\u0001"+
